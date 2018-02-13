@@ -1,4 +1,10 @@
-# create-react-app with a Node server on Heroku
+# Ben and Oranit Save the Date Quiz
+I cloned this amazing starter kit from [here](https://github.com/mars/heroku-cra-node) that efficiently hooks up a react UI with an node/express backend.
+
+I built out the UI with React and a bit of Bootstrap, and added mongoDB to store answers to the poll.
+
+(original readme preserved below)
+## create-react-app with a Node server on Heroku
 
 A minimal example of using a Node backend (server for API, proxy, & routing) with a [React frontend](https://github.com/facebookincubator/create-react-app).
 
