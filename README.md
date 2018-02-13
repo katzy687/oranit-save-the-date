@@ -1,5 +1,5 @@
 # Ben and Oranit Save the Date Quiz
-I cloned this amazing starter kit from [here](https://github.com/mars/heroku-cra-node) that efficiently hooks up a react UI with an node/express backend.
+I cloned this amazing starter kit from [here](https://github.com/mars/heroku-cra-node) that efficiently hooks up a react UI with an node/express backend, and even includes some handy heroku build scripts.
 
 I built out the UI with React and a bit of Bootstrap, and added mongoDB to store answers to the poll.
 
