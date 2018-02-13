@@ -1,9 +1,18 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const answers = require('../routes/answers');
+
+// not sure if I need this crap
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+// DB config
+require('../config/db');
+
 const PORT = process.env.PORT || 5000;
+
 
 // Multi-process to utilize all CPU cores.
 if (cluster.isMaster) {
@@ -24,14 +33,23 @@ if (cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
+  // Body parser middleware
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  // Enable CORS
+  app.use(cors());
+
+  app.use('/answers', answers);
+
   // Answer API requests.
   app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
+    res.send('{"message":"Hello from the custom server fool!"}');
   });
 
   // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(request, response) {
+  app.get('*', function (request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
 

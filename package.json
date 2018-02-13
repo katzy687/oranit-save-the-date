@@ -7,14 +7,20 @@
   },
   "scripts": {
     "start": "node server",
-    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "server": "nodemon server",
+    "client": "npm start --prefix react-ui",
+    "devCombo": "concurrently \"npm run server\" \"npm run client\""
   },
   "cacheDirectories": [
     "node_modules",
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.14.1",
+    "mongoose": "^5.0.4"
   },
   "repository": {
     "type": "git",
@@ -27,5 +33,8 @@
     "react"
   ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.14.12"
+  }
 }

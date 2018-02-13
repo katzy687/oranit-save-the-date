@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {questionData} from './data/questionData';
+
+// quiz imports
+import BoxScore from './components/quiz/BoxScore.js';
+import QuestionList from './components/quiz/QuestionList.js';
+import Results from './components/quiz/Results.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: null,
-      fetching: true
+      fetching: true,
+      score: 0,
+      current: 0,
+      questions: questionData,
+      answers: [],
+      allDbAnswers: [],
+      dbFetching: true
     };
   }
 
@@ -32,24 +43,91 @@ class App extends Component {
       })
   }
 
+  componentDidUpdate() {
+    console.log('updated answers are:', this.state.answers);
+    console.log('db answers are:', this.state.allDbAnswers);
+    console.log(this.state);
+    
+    if (this.state.current > this.state.questions.length - 1 && this.state.dbFetching ) {
+      this.postDataThenGetDb();
+    }
+    
+  }
+
+  setCurrent(current) {
+    this.setState({ current });
+  }
+  setScore(score) {
+    this.setState({ score });
+  }
+  storeAnswer(answer) {
+    this.setState(prevState => ({
+      answers: [...prevState.answers, answer]
+    }));
+  }
+
+  // mongo post stuff
+  postDataThenGetDb() {
+    fetch('/answers', {
+      method: 'POST', 
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({answers: this.state.answers, score: this.state.score})
+    }).then(res => res.json())
+    .then(data => console.log(data))
+    .then(() => this.getData())
+    .catch(err => console.log(err))
+  }
+
+  getData() {
+    console.log('getting data son!');
+    fetch('/answers')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+        this.setState({
+          allDbAnswers: json.answers,
+          dbFetching: false
+        });
+      }).catch(e => {
+        this.setState({
+          message: `API call failed: ${e}`,
+          dbFetching: false
+        });
+      })
+  }
+
+
   render() {
+    let boxscore, results;
+    if (this.state.current > this.state.questions.length - 1) {
+       boxscore = '';
+       results = <Results {...this.state} />
+    } else {
+       boxscore = <BoxScore {...this.state} />
+       results = '';
+    }
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          {'This is '}
-          <a href="https://github.com/mars/heroku-cra-node">
-            {'create-react-app with a custom Node/Express server'}
-          </a><br/>
-        </p>
         <p className="App-intro">
           {this.state.fetching
             ? 'Fetching message from API'
             : this.state.message}
         </p>
+            
+        <div>
+          {boxscore}
+          <QuestionList storeAnswer={this.storeAnswer.bind(this)} setScore={this.setScore.bind(this)} setCurrent={this.setCurrent.bind(this)} {...this.state} />
+          {results}
+        </div>
+
       </div>
     );
   }
