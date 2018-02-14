@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import {questionData} from './data/questionData';
+import {questionData, dummyDBData} from './data/questionData';
 
 // quiz imports
 import BoxScore from './components/quiz/BoxScore.js';
 import QuestionList from './components/quiz/QuestionList.js';
 import Results from './components/quiz/Results.js';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -14,10 +16,12 @@ class App extends Component {
       message: null,
       fetching: true,
       score: 0,
-      current: 0,
+      // current: 0,
+      current: 4, // dummy testing
       questions: questionData,
       answers: [],
-      allDbAnswers: [],
+      // allDbAnswers: [],
+      allDbAnswers: dummyDBData,
       dbFetching: true
     };
   }
@@ -49,7 +53,8 @@ class App extends Component {
     console.log(this.state);
     
     if (this.state.current > this.state.questions.length - 1 && this.state.dbFetching ) {
-      this.postDataThenGetDb();
+      // this.postDataThenGetDb();
+      console.log('theoretically posting to db while I manage graphs');
     }
     
   }

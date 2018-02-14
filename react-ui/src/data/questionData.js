@@ -44,9 +44,13 @@ export const questionData = [
       {
         id: 'c',
         text: 'Airbnb',
+      },
+      {
+        id: 'd',
+        text: 'whateva',
       }
     ],
-    correct: 'b'
+    correct: 'a'
   },
   {
     id: 2,
@@ -60,8 +64,16 @@ export const questionData = [
         id: 'b',
         text: 'No',
       },
+      {
+        id: 'c',
+        text: 'whateva',
+      },
+      {
+        id: 'd',
+        text: 'whateva',
+      },
     ],
-    correct: 'a'
+    correct: 'c'
   },
   {
     id: 3,
@@ -75,7 +87,35 @@ export const questionData = [
         id: 'b',
         text: 'No',
       },
+      {
+        id: 'c',
+        text: 'ya ya ya',
+      },
+      {
+        id: 'd',
+        text: 'ok ok ok',
+      }
     ],
-    correct: 'b'
+    correct: 'd'
   }
 ];
+
+
+export const dummyDBData = [
+  {
+    answers: ['a', 'b', 'c', 'a'],
+    score: 4
+  },
+  {
+    answers: ['a', 'b', 'c', 'd'],
+    score: 3
+  },
+  {
+    answers: ['a', 'a', 'd', 'd'],
+    score:2
+  },
+  {
+    answers: ['a', 'a', 'd', 'a'],
+    score: 2
+  }
+]
