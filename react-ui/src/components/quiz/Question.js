@@ -59,7 +59,7 @@ class Question extends React.Component {
     const { question } = this.props;
     return (
       <div className="question-container animated bounceInLeft">
-        <h3>{question.text}</h3>
+        <h3 style={{ direction: 'rtl' }}>{question.text}</h3>
         <hr />
         <ul className="quiz-list">
           {

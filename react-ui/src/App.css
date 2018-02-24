@@ -1,4 +1,15 @@
+
+
 .App {
   text-align: center;
-  padding: 1rem;
+  /* padding: 1rem; */
+  background: lightblue;
 }
+
+.trans-card {
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  background: #fafafa;
+  color: #424242;
+}
+
