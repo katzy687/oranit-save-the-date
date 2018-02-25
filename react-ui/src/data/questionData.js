@@ -37,7 +37,7 @@ export const questionData = [
       },
       {
         id: 'd',
-        text: 'Axwell ^ Ingrosso - More Than You Know',
+        text: 'More Than You Know',
         audioURL: moreThan,
         imgUrl: 'https://images.genius.com/948d4857df57fe12f9bed717a6d2a2ee.1000x1000x1.jpg'
       }
