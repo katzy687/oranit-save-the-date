@@ -27,7 +27,8 @@ class App extends Component {
       answers: [],
       allDbAnswers: [],
       // allDbAnswers: dummyDBData,
-      dbFetching: true
+      dbFetching: true,
+      imageLoading: true
     };
   }
 
@@ -58,7 +59,7 @@ class App extends Component {
       this.postDataThenGetDb();
       // console.log('theoretically posting to db while I manage graphs');
     }
-    
+
     console.log('updated answers are:', this.state.answers);
     console.log('db answers are:', this.state.allDbAnswers);
     console.log(this.state);
@@ -114,8 +115,20 @@ class App extends Component {
       })
   }
 
+  // image stuff
+  handleImageLoaded = () => {
+    console.log('image loaded fired');
+    this.setState({ imageLoading: false })
+  }
+
+  handleImageError = () => {
+    this.setState({ imageLoading: false })
+  }
+
 
   render() {
+    const loaderStatus = this.state.imageLoading ? <div className="loader">Loading...</div> : null;
+
     let boxscore, results;
     if (this.state.current > this.state.questions.length - 1) {
        boxscore = '';
@@ -138,7 +151,13 @@ class App extends Component {
               <h5 style={{ fontWeight: 700 }}>13.03.2018</h5>
             </div> */}
           <div className="header-content" style={{ maxWidth: '400px', margin: '0 auto'}}>
-            <img  src={header} style={{ width: '100%'}} alt="header-image"/>
+            {loaderStatus}
+            <img  src={header} 
+                  style={{ width: '100%'}} 
+                  alt="save-the-date-march-13th"
+                  onLoad={this.handleImageLoaded}
+                  onError={this.handleImageError}
+            />
           </div>
         </div>
             
