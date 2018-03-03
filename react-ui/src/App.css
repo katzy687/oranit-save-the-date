@@ -1,9 +1,9 @@
-
-
 .App {
   text-align: center;
   /* padding: 1rem; */
-  background: lightblue;
+  /* background: url(); */
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 .trans-card {
@@ -13,3 +13,10 @@
   color: #424242;
 }
 
+.near-clear {
+  background: rgba(251, 250, 255, 0.3);
+}
+
+.more-solid {
+  background: rgba(255, 255, 255, 0.8);
+}

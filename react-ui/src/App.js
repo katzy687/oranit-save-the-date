@@ -10,6 +10,9 @@ import Results from './components/quiz/Results.js';
 import bgPic from './assets/pictures/bg.jpeg';
 import headerBGPic from './assets/pictures/headerBG.jpeg';
 
+import background from './assets/pictures/bg-1.svg';
+import header from './assets/pictures/header.svg';
+
 
 class App extends Component {
   constructor(props) {
@@ -19,11 +22,11 @@ class App extends Component {
       fetching: true,
       score: 0,
       current: 0,
-      // current: 4, // dummy testing
+      // current: 5, // dummy testing
       questions: questionData,
       answers: [],
-      // allDbAnswers: [],
-      allDbAnswers: dummyDBData,
+      allDbAnswers: [],
+      // allDbAnswers: dummyDBData,
       dbFetching: true
     };
   }
@@ -50,14 +53,15 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    
+    if (this.state.current > this.state.questions.length - 1 && this.state.dbFetching ) {
+      this.postDataThenGetDb();
+      // console.log('theoretically posting to db while I manage graphs');
+    }
+    
     console.log('updated answers are:', this.state.answers);
     console.log('db answers are:', this.state.allDbAnswers);
     console.log(this.state);
-    
-    if (this.state.current > this.state.questions.length - 1 && this.state.dbFetching ) {
-      // this.postDataThenGetDb();
-      console.log('theoretically posting to db while I manage graphs');
-    }
     
   }
 
@@ -122,17 +126,20 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <div className="App" style={{ background: `url(${background})` }}>
         <div className="App-intro" style={styles.header}>
           {/* {this.state.fetching
             ? 'Fetching message from API'
             : this.state.message} */}
-            <div style={styles.headerBG}></div>
-            <div className="header-content" style={styles.headerContent}>
+            {/* <div style={styles.headerBG}></div> */}
+            {/* <div className="header-content" style={styles.headerContent}>
               <h1 style={{fontFamily: 'courier'}}>Oranit & Ben</h1>
               <h3 style={{ fontStyle: 'italic' }}>Save The Date</h3>
               <h5 style={{ fontWeight: 700 }}>13.03.2018</h5>
-            </div>
+            </div> */}
+          <div className="header-content" style={{ maxWidth: '400px', margin: '0 auto'}}>
+            <img  src={header} style={{ width: '100%'}} alt="header-image"/>
+          </div>
         </div>
             
         <div className="question-section" style={styles.questionSection}>
@@ -155,16 +162,17 @@ const styles = {
   header: {
     // background: `url(${headerBGPic})`,
     // backgroundPosition: 'center',
-    height: '200px',
+    // height: '200px',
     // backgroundSize: 'contain',
     margin: 0,
     textAlign: 'center',
     fontFamily: 'Helvetica',
     color: 'black',
-    position: 'relative'
+    position: 'relative',
+    padding: '1rem'
   },
   headerBG: {
-    background: `url(${headerBGPic})`,
+    // background: `url(${headerBGPic})`,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -188,7 +196,7 @@ const styles = {
 
   },
   questionSection: {
-    background: `url(${bgPic})`,
+    // background: `url(${bgPic})`,
     padding: '1rem 0'
   }
 }

@@ -19,6 +19,8 @@ class Question extends React.Component {
     storeAnswer(selected);
     setTimeout(() => {
       setCurrent(this.props.current + 1);
+      // reset to top of page on answer
+      window.scrollTo(0, 0);
     }, 500);
   }
 
@@ -65,7 +67,7 @@ class Question extends React.Component {
     const { question } = this.props;
     return (
       <div className="question-container animated bounceInLeft">
-        <h3 style={{ direction: 'rtl' }}>{question.text}</h3>
+        <h3 style={{ direction: 'rtl', color: 'white' }}>{question.text}</h3>
         <hr />
         <ul className="quiz-list">
           {
@@ -75,14 +77,14 @@ class Question extends React.Component {
               return (
                 <li onMouseEnter={() => this.handleMouseEnter(index)} 
                     onMouseLeave={() => this.handleMouseExit(index)}
-                    className="list-group-item quiz-item card" 
+                    className="list-group-item quiz-item card near-clear" 
                     key={choice.id}
                     tabIndex={index + 1}>
                   {/* <label className="radio-label"> */}
                     {/* <input onChange={this.handleChange.bind(this)} type="radio" name={question.id} value={choice.id} /> */}
                     <div>
                       <p> {choice.text} </p>
-                      <div className="quiz-img-container">
+                      <div className="quiz-img-container more-solid">
                         <img src={choice.imgUrl ? choice.imgUrl : "https://a.playmoss.com//uploads/images/r/e/g/reggaeton-2.jpg"} alt="" />
                       </div>
                       <div className="quiz-btn-container" style={{display: 'flex', justifyContent: 'space-between', fontSize: '1.7rem'}}>
