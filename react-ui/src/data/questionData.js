@@ -10,6 +10,8 @@ import reggaeton from '../assets/audio/nicky-snip.mp3';
 import mizrachi from '../assets/audio/shluky-snip.mp3';
 import dance from '../assets/audio/tiesto-snip.mp3';
 
+import leoPic from '../assets/pictures/leo.jpeg';
+
 
 
 export const questionData = [
@@ -141,7 +143,8 @@ export const questionData = [
       {
         id: 'b',
         text: 'ליאו',
-        imgUrl: 'https://s-media-cache-ak0.pinimg.com/originals/cd/d3/8b/cdd38bc027f3148eb138cc0fb14e330c.jpg'
+        // imgUrl: 'https://s-media-cache-ak0.pinimg.com/originals/cd/d3/8b/cdd38bc027f3148eb138cc0fb14e330c.jpg',
+        imgUrl: leoPic
       },
       {
         id: 'c',
